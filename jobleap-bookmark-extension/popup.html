@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> <!-- 设置页面语言为中文，帮助浏览器识别和适配 -->
+<head>
+  <meta charset="UTF-8"> <!-- 声明字符编码为UTF-8，确保中文显示无乱码 -->
+  <title>jobleap.cn收藏夹</title> <!-- 中文页面标题，与插件名称一致 -->
+  <style>
+    body {
+      width: 200px;
+      padding: 10px;
+      /* 补充中文字体库，优先使用系统自带中文字体，保证中文显示美观 */
+      font-family: 'Microsoft YaHei', 'Noto Sans SC', 'Heiti SC', Arial, sans-serif;
+      margin: 0; /* 清除默认边距，避免布局偏移 */
+    }
+    /* 增加页面标题样式，明确插件用途 */
+    .extension-title {
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+      margin: 0 0 10px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee; /* 下划线分隔标题与按钮，提升布局层次 */
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .jump-button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .jump-button:hover {
+      background-color: #0056b3;
+    }
+    .jump-button:nth-child(2) {
+      background-color: #28a745;
+    }
+    .jump-button:nth-child(2):hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <!-- 增加中文标题，让用户直观了解插件功能 -->
+  <h3 class="extension-title">jobleap.cn收藏夹</h3>
+  <div class="button-container">
+    <!-- 按钮文本保持清晰中文表述，与目标网站对应 -->
+    <button class="jump-button" id="btn1">前往 jobleap.cn</button>
+    <button class="jump-button" id="btn2">前往 mp.jobleap4u.com</button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

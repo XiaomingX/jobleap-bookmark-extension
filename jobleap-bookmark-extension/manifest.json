@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "jobleap.cn收藏夹",
+  "version": "1.0",
+  "description": "快速访问jobleap相关网站的收藏夹插件",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": ["activeTab"]
+}
