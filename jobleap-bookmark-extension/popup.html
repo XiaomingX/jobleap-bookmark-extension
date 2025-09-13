@@ -1,59 +1,265 @@
 <!DOCTYPE html>
-<html lang="zh-CN"> <!-- 设置页面语言为中文，帮助浏览器识别和适配 -->
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"> <!-- 声明字符编码为UTF-8，确保中文显示无乱码 -->
-  <title>jobleap.cn收藏夹</title> <!-- 中文页面标题，与插件名称一致 -->
+  <meta charset="UTF-8">
+  <title>JobLeap - 职场飞跃</title>
   <style>
     body {
-      width: 200px;
-      padding: 10px;
-      /* 补充中文字体库，优先使用系统自带中文字体，保证中文显示美观 */
+      width: 300px;
+      padding: 0;
+      margin: 0;
       font-family: 'Microsoft YaHei', 'Noto Sans SC', 'Heiti SC', Arial, sans-serif;
-      margin: 0; /* 清除默认边距，避免布局偏移 */
-    }
-    /* 增加页面标题样式，明确插件用途 */
-    .extension-title {
-      font-size: 16px;
       color: #333;
-      text-align: center;
-      margin: 0 0 10px 0;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #eee; /* 下划线分隔标题与按钮，提升布局层次 */
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
+    
+    .header {
+      background-color: #1a73e8;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .slogan {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+    
+    .content {
+      padding: 15px;
+    }
+    
+    .search-box {
+      margin-bottom: 15px;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    
     .button-container {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
+      margin-bottom: 15px;
     }
+    
     .jump-button {
-      padding: 8px 12px;
+      padding: 10px 12px;
       border: none;
       border-radius: 4px;
-      background-color: #007bff;
+      background-color: #1a73e8;
       color: white;
       font-size: 14px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
+    
     .jump-button:hover {
-      background-color: #0056b3;
+      background-color: #0d5bbc;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    .jump-button:nth-child(2) {
-      background-color: #28a745;
+    
+    .jump-button.secondary {
+      background-color: #34a853;
     }
-    .jump-button:nth-child(2):hover {
-      background-color: #218838;
+    
+    .jump-button.secondary:hover {
+      background-color: #2a8644;
+    }
+    
+    .section-title {
+      font-size: 14px;
+      color: #666;
+      margin: 15px 0 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .section-title .more {
+      font-size: 12px;
+      color: #1a73e8;
+      cursor: pointer;
+    }
+    
+    .recent-visits {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .recent-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #f5f5f5;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .recent-item:hover {
+      background-color: #f9f9f9;
+    }
+    
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .action-btn {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: white;
+      color: #666;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    
+    .action-btn:hover {
+      border-color: #1a73e8;
+      color: #1a73e8;
+    }
+    
+    .footer {
+      padding: 10px 15px;
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+      border-top: 1px solid #f5f5f5;
+    }
+    
+    .tooltip {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.2);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      cursor: help;
+    }
+    
+    /* 引导提示样式 */
+    .guide-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.7);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .guide-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 250px;
+      text-align: center;
+    }
+    
+    .guide-button {
+      margin-top: 15px;
+      padding: 8px 16px;
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <!-- 增加中文标题，让用户直观了解插件功能 -->
-  <h3 class="extension-title">jobleap.cn收藏夹</h3>
-  <div class="button-container">
-    <!-- 按钮文本保持清晰中文表述，与目标网站对应 -->
-    <button class="jump-button" id="btn1">前往 jobleap.cn</button>
-    <button class="jump-button" id="btn2">前往 mp.jobleap4u.com</button>
+  <div class="header">
+    <div class="logo">JobLeap</div>
+    <div class="slogan">职场飞跃，从此开始</div>
+    <div class="tooltip" id="helpBtn">?</div>
   </div>
+  
+  <div class="content">
+    <div class="search-box">
+      <input type="text" class="search-input" placeholder="搜索职位、公司或关键词..." id="searchInput">
+    </div>
+    
+    <div class="button-container">
+      <button class="jump-button" id="btn1">
+        <i>🏠</i> 访问 JobLeap 官网
+      </button>
+      <button class="jump-button secondary" id="btn2">
+        <i>📱</i> 访问 JobLeap 移动端
+      </button>
+    </div>
+    
+    <div class="section-title">
+      <span>最近浏览</span>
+      <span class="more" id="clearRecent">清空</span>
+    </div>
+    <ul class="recent-visits" id="recentVisits">
+      <!-- 最近浏览记录将通过JS动态添加 -->
+      <li class="recent-item">暂无浏览记录</li>
+    </ul>
+    
+    <div class="section-title">
+      <span>快速访问</span>
+    </div>
+    <div class="button-container">
+      <button class="jump-button" id="btn3">
+        <i>🔍</i> 最新职位
+      </button>
+      <button class="jump-button" id="btn4">
+        <i>💼</i> 热门公司
+      </button>
+    </div>
+    
+    <div class="actions">
+      <div class="action-btn" id="shareBtn">分享插件</div>
+      <div class="action-btn" id="notifyBtn">开启通知</div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    JobLeap 插件 v1.0.1
+  </div>
+  
+  <!-- 引导提示 -->
+  <div class="guide-overlay" id="guideOverlay">
+    <div class="guide-content">
+      <h3>欢迎使用 JobLeap 插件</h3>
+      <p>快速访问招聘信息，不错过任何职场机会</p>
+      <button class="guide-button" id="closeGuide">开始使用</button>
+    </div>
+  </div>
+  
   <script src="popup.js"></script>
 </body>
 </html>
